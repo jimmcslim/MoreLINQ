@@ -167,5 +167,13 @@ namespace MoreLinq
                 TCardinality one,
                 TCardinality many) =>
             TrySingle(source, zero, one, many, ValueTuple.Create);
+
+        public static TCardinality TrySingle<T, TCardinality>(this IEnumerable<T> source,
+            TCardinality zero, TCardinality one, TCardinality many, out T result)
+        {
+            var (cardinality, value) = source.TrySingle(zero, one, many);
+            result = value;
+            return cardinality;
+        }
     }
 }
